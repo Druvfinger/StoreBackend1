@@ -9,4 +9,23 @@ import java.util.List;
 @RestController
 @RequestMapping("/purchase")
 public class PurchaseController {
+
+    private final PurchaseService purchaseService;
+
+    public PurchaseController(PurchaseService purchaseService) {
+        this.purchaseService = purchaseService;
+    }
+
+    @GetMapping
+    public List<Purchase> getAllItems(){
+        return purchaseService.getAllPurchase();
+    }
+
+    @GetMapping("/{customerId}")
+    public List<Purchase> getPurchasesByCustomerId(@PathVariable long customerId){
+        return purchaseService.getCustomerPurchases(customerId);
+    }
+
+
+
 }

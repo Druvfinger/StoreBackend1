@@ -26,10 +26,12 @@ public class CustomerController {
     public List<Customer> getCustomers(){
         return customerService.getCustomers();
     }
+
     @GetMapping("/{id}")
     public Customer getCustomerById(@PathVariable long id){
         return customerService.getCustomerById(id);
     }
+
     @PostMapping("/add")
     public String addCustomer(@RequestBody Customer customer){
       if (customer.getName() == null || customer.getSsn() == null){

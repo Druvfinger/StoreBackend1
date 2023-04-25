@@ -28,6 +28,7 @@ public class ItemService {
     public List<Item> getAllItems(){
         return itemRepo.findAll();
     }
+
     public Item getItemById(long id){
         return itemRepo.findById(id).get(); // Maybe should return Optional??
     }

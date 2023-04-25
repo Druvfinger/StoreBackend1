@@ -18,10 +18,12 @@ public class ItemController {
     public ItemController(ItemService itemService) {
         this.itemService = itemService;
     }
-    @GetMapping("/items")
-    public List<Item> getAllItems(){
+
+    @GetMapping()
+    public List<Item> getAllItems() {
         return itemService.getAllItems();
     }
+
     @GetMapping("/{id}")
     public Item getItemById(@PathVariable long id){
         return itemService.getItemById(id);
@@ -45,4 +47,4 @@ public class ItemController {
 }
 
 
-}
+

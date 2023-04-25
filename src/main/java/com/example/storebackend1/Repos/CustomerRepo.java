@@ -5,4 +5,5 @@ import com.example.storebackend1.Entities.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CustomerRepo extends JpaRepository<Customer,Long> {
+
 }

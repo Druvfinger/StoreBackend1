@@ -5,6 +5,7 @@ import com.example.storebackend1.Entities.Item;
 import com.example.storebackend1.Entities.Purchase;
 import com.example.storebackend1.Repos.CustomerRepo;
 import com.example.storebackend1.Repos.ItemRepo;
+import com.example.storebackend1.Repos.PurchaseRepo;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,7 +25,7 @@ public class StoreBackend1Application {
     }
 
     @Bean
-    public CommandLineRunner commandLineRunner(CustomerRepo customerRepo, ItemRepo itemRepo) {
+    public CommandLineRunner commandLineRunner(CustomerRepo customerRepo, ItemRepo itemRepo, PurchaseRepo purchaseRepo) {
         return args -> {
 
             Customer customer1 = new Customer("ssn1", "n1");
@@ -54,6 +55,25 @@ public class StoreBackend1Application {
             itemRepo.save(item5);
 
 
+            Purchase purchase = new Purchase(customer1, item1); // kom ihåg list of är final
+            Purchase purchase1 = new Purchase(customer4, item2);
+            Purchase purchase2 = new Purchase(customer3, item3);
+            Purchase purchase3 = new Purchase(customer4, item4);
+
+
+
+//                    Customer temp = customerRepo.findById(customer1.getId()).get();
+//                    temp.addPurchase(purchase);
+//                    customer3.addPurchase(purchase2);
+//                    customer4.addPurchase(purchase1);
+//                    customer4.addPurchase(purchase3);
+
+
+
+            purchaseRepo.save(purchase);
+            purchaseRepo.save(purchase1);
+            purchaseRepo.save(purchase2);
+            purchaseRepo.save(purchase3);
 
         };
     }
