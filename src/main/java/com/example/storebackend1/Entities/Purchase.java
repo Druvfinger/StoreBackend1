@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -33,6 +35,8 @@ public class Purchase {
 
     public Purchase(Customer customer, Item item){
         this.customer = customer;
-        this.items = items;
+        this.items.add(item);
     }
+
+
 }

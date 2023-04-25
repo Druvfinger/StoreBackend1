@@ -7,13 +7,16 @@ import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.LocalDateTime;
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/item")
 public class ItemController {
 
     private final ItemService itemService;
+    //private static final Logger log = LoggerFactory.getLogger(ItemController.class);
 
     public ItemController(ItemService itemService) {
         this.itemService = itemService;
@@ -25,7 +28,7 @@ public class ItemController {
     }
 
     @GetMapping("/{id}")
-    public Item getItemById(@PathVariable long id){
+    public Item getItemById(@PathVariable long id) {
         return itemService.getItemById(id);
     }
 
