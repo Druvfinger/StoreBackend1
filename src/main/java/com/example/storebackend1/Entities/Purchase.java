@@ -1,9 +1,11 @@
-package com.example.storebackend1.Models;
+package com.example.storebackend1.Entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
 import java.util.List;
@@ -17,18 +19,19 @@ public class Purchase {
     @Id
     @GeneratedValue
     private Long id;
-    private Date purchaseDate;
+    @CreationTimestamp
+    private LocalDateTime purchaseDate;
 
     @OneToOne
     @JoinColumn
     private Customer customer;
 
     @OneToMany
-    @JoinColumn
-    List<Item> items;
+    @JoinTable
+    List<Item> items = new ArrayList<>();
 
-    private Purchase(Date purchaseDate, Customer customer, List<Item> items){
-        this.purchaseDate = purchaseDate;
+
+    public Purchase(Customer customer, Item item){
         this.customer = customer;
         this.items = items;
     }

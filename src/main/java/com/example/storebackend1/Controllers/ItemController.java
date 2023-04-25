@@ -1,12 +1,11 @@
 package com.example.storebackend1.Controllers;
 
-import com.example.storebackend1.Models.Item;
+import com.example.storebackend1.Entities.Item;
 import com.example.storebackend1.Services.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -16,7 +15,6 @@ public class ItemController {
 
     private final ItemService itemService;
 
-    @Autowired
     public ItemController(ItemService itemService) {
         this.itemService = itemService;
     }
@@ -28,6 +26,23 @@ public class ItemController {
     public Item getItemById(@PathVariable long id){
         return itemService.getItemById(id);
     }
+
+    @PostMapping("/add")
+    public String addItem(@RequestBody Item item) {
+        if (item.getName() != null) {
+            if (item.getPrice() != 0.0) { // CAN WE FIX NICER?
+                itemService.addItem(item);
+                return "Item with name: " + item.getName() + " added";
+            }
+        }
+        return "Could not add item!";
+    }
+
+    @PostMapping("/buy")
+    public String buyItem(@RequestParam long itemId, @RequestParam long customerId){
+        return itemService.buy(itemId, customerId);
+    }
+}
 
 
 }

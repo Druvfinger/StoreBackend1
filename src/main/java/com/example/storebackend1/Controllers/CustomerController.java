@@ -1,24 +1,28 @@
 package com.example.storebackend1.Controllers;
 
-import com.example.storebackend1.Models.Customer;
+import com.example.storebackend1.Entities.Customer;
 import com.example.storebackend1.Services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("customer")
+//@RequiredArgsConstructor
 public class CustomerController {
+
 
 
     private final CustomerService customerService;
 
-    @Autowired
     public CustomerController(CustomerService customerService) {
         this.customerService = customerService;
     }
-    @GetMapping("/customers")
+
+    @GetMapping()
+    @ResponseStatus(HttpStatus.OK)//Det svaret du förväntar dig att få
     public List<Customer> getCustomers(){
         return customerService.getCustomers();
     }
@@ -27,8 +31,19 @@ public class CustomerController {
         return customerService.getCustomerById(id);
     }
     @PostMapping("/add")
-    public String addCustomer(@RequestParam String ssn ,@RequestParam String name){
-        customerService.addCustomer(ssn,name);
-        return "Customer with name: "+ name +" added.";
+    public String addCustomer(@RequestBody Customer customer){
+      if (customer.getName() == null || customer.getSsn() == null){
+          return "Could not add customer do better!";
+      }
+      customerService.addCustomer(customer);
+      return "Customer with name: "+ customer.getName() +" added.";
+    }
+
+//EXTRA
+    @GetMapping("/remove")
+    public String deleteCustomer(long id){
+        String name = customerService.getCustomerById(id).getName();
+        customerService.deleteCustomer(id);
+        return "Customer with name: " +name + " deleted";
     }
 }
