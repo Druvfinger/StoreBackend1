@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("customersT")
+@RequestMapping("customersThymeleaf")
 public class CustomerControllerThymeleaf {
 
     private final CustomerService customerService;
@@ -23,7 +23,7 @@ public class CustomerControllerThymeleaf {
         List<Customer> customerList = customerService.getCustomers();
         model.addAttribute("customerList", customerList);
         model.addAttribute("listTitle", "Customer:");
-        model.addAttribute("title", "All Customer!");
+        model.addAttribute("title", "All Customers!");
         return "getCustomer.html";
     }
 

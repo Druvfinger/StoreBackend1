@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("purchaseT")
+@RequestMapping("purchaseThymeleaf")
 public class PurchaseControllerThymeleaf {
 
     private final PurchaseService purchaseService;

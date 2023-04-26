@@ -4,6 +4,7 @@ import com.example.storebackend1.Entities.Customer;
 import com.example.storebackend1.Entities.Item;
 import com.example.storebackend1.Repos.CustomerRepo;
 import com.example.storebackend1.Repos.ItemRepo;
+import com.example.storebackend1.Repos.PurchaseRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,21 +30,22 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class ItemsControllerTest {
     @Autowired
     private MockMvc mockMvc;
-
     @MockBean
     private ItemRepo mockItemRepo;
     @MockBean
     private CustomerRepo mockCustomerRepo;
+    @MockBean
+    private PurchaseRepo mockPurchaseRepo;
 
     @BeforeEach
     public void init() {
-        Item item1 = new Item(1L, "product1", 1.0);
-        Item item2 = new Item(2L, "product2", 2.0);
-        Item item3 = new Item(3L, "product3", 3.0);
+        Item item1 = new Item(1L,"Laptop", 199.99);
+        Item item2 = new Item(2L,"TV", 148.49);
+        Item item3 = new Item(3L,"Playstation", 300.00);
 
-        Customer customer1 = new Customer(1L, "123", "Sara");
-        Customer customer2 = new Customer(2L, "312", "Kalle");
-        Customer customer3 = new Customer(3L, "432", "Kanin");
+        Customer customer1 = new Customer(1L,"123456", "Karl Nilsson");
+        Customer customer2 = new Customer(2L,"234567", "Anna Jakobsson");
+        Customer customer3 = new Customer(3L,"345678", "Nils Svensson");
 
         when(mockItemRepo.findById(1L)).thenReturn(Optional.of(item1));
         when(mockItemRepo.findById(2L)).thenReturn(Optional.of(item2));
@@ -64,52 +66,23 @@ public class ItemsControllerTest {
     }
 
     @Test
-    public void getAllItemsTest() throws Exception { // UNTESTED
+    public void getAllItemsTest() throws Exception {
         this.mockMvc.perform(get("/items")).andExpect(status().isOk()).andExpect(content()
-                .json("[{\"name\":\"product1\", \"id\":1, \"price\":1.0},{\"name\":\"product2\", \"id\":2, \"price\":2.0},{\"name\":\"product3\", \"id\":3, \"price\":3.0}]"));
+                .json("[{\"name\":\"Laptop\", \"id\":1, \"price\":199.99},{\"name\":\"TV\", \"id\":2, \"price\":148.49},{\"name\":\"Playstation\", \"id\":3, \"price\":300.00}]"));
     }
 
     @Test
-    public void getItemByIdTest() throws Exception { //UNTESTED
+    public void getItemByIdTest() throws Exception {
         this.mockMvc.perform(get("/items/1")).andExpect(status().isOk()).andExpect(
                 content().json("{\"name\":\"product1\", \"id\":1, \"price\":1.0}"));
     }
 
-    //DENNA VETTE FAN
     @Test
     public void buyItemTest() throws Exception {
-        this.mockMvc.perform(post("/items/buy"))
-                .andExpect(status().isOk()).andExpect(content()
-                .string(equalTo("Purchase successful")));
-    }
-
-    @Test
-    public void testPost() throws Exception {
         mockMvc.perform(post("/items/buy")
                         .param("itemId", "1")
                         .param("customerId", "1"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("Purchase successful"));
-    }
-
-    @Test
-    public void buyItemTest2() throws Exception {
-        long customerId = mockCustomerRepo.findById(1L).get().getId();
-        long itemId = mockItemRepo.findById(1L).get().getId();
-        this.mockMvc.perform(post("/items/buy").param("customerId", Long.toString(customerId)).param("itemId", Long.toString(itemId)))
-                .andExpect(status().isOk())
-                .andExpect(content().string("Purchase successful"));
-    }
-
-
-
-
-    @Test
-    public void buyItemTest1() throws Exception {
-        long customerId = mockCustomerRepo.findById(1L).get().getId();
-        long itemId = mockItemRepo.findById(1L).get().getId();
-        this.mockMvc.perform(post("/items/buy").param("customerId","1").param("itemId", "1")).andDo(print())
-                .andExpect(status().isOk()).andExpect(content()
-                        .string(equalTo("Purchase successful")));
     }
 }

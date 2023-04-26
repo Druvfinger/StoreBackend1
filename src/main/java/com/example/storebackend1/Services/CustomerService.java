@@ -3,7 +3,6 @@ package com.example.storebackend1.Services;
 
 import com.example.storebackend1.Entities.Customer;
 import com.example.storebackend1.Repos.CustomerRepo;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -20,8 +19,7 @@ public class CustomerService {
         return customerRepo.findAll();
     }
     public Customer getCustomerById(long id){
-        return customerRepo.findById(id).get(); // maybe this should return an optional of Customer Instead ??
-        //return new Customer(1,"123546","name");//for testing
+        return customerRepo.findById(id).get();
     }
     public void addCustomer(Customer customer){
             customerRepo.save(customer);

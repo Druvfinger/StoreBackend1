@@ -27,21 +27,17 @@ public class ItemService {
         return itemRepo.findAll();
     }
 
-    public Item getItemById(long id){
-        return itemRepo.findById(id).get(); // Maybe should return Optional??
+    public Item getItemById(long id) {
+        return itemRepo.findById(id).get();
     }
-
     public void addItem(Item item){
         itemRepo.save(item);
     }
     public String buy(long itemId, long  customerId){
         Item item = itemRepo.findById(itemId).orElse(null);
         Customer customer = customerRepo.findById(customerId).orElse(null);
-        System.out.println(item + " - " + customer);
         if (item != null){
-            System.out.println("1");
             if (customer != null) {
-                System.out.println("2");
                 purchaseRepo.save(new Purchase(customer, item));
                 return "Purchase successful";
             }
