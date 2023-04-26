@@ -18,7 +18,7 @@ public class StoreBackend1Application {
     public static void main(String[] args) {
         SpringApplication.run(StoreBackend1Application.class, args);
     }
-/*
+
     @Bean
     public CommandLineRunner commandLineRunner(CustomerRepo customerRepo, ItemRepo itemRepo, PurchaseRepo purchaseRepo) {
         return args -> {
@@ -72,5 +72,5 @@ public class StoreBackend1Application {
 
         };
     }
-*/
+
 }

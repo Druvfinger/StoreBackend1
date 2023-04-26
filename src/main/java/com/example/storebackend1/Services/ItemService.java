@@ -30,8 +30,15 @@ public class ItemService {
     public Item getItemById(long id) {
         return itemRepo.findById(id).get();
     }
-    public void addItem(Item item){
-        itemRepo.save(item);
+    public String addItem(Item item){
+        if (item.getName() != null) {
+            if (item.getPrice() != 0.0) {
+                itemRepo.save(item);
+                return "Item with name: " + item.getName() + " added";
+            }
+        }
+        return "Could not add item!";
+
     }
     public String buy(long itemId, long  customerId){
         Item item = itemRepo.findById(itemId).orElse(null);

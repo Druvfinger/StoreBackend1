@@ -28,13 +28,7 @@ public class ItemController {
 
     @PostMapping("/add")
     public String addItem(@RequestBody Item item) {
-        if (item.getName() != null) {
-            if (item.getPrice() != 0.0) {
-                itemService.addItem(item);
-                return "Item with name: " + item.getName() + " added";
-            }
-        }
-        return "Could not add item!";
+        return itemService.addItem(item);
     }
 
     @PostMapping("/buy")

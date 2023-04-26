@@ -31,14 +31,8 @@ public class CustomerController {
 
     @PostMapping("/add")
     public String addCustomer(@RequestBody Customer customer){
-      if (customer.getName() == null || customer.getSsn() == null){
-          return "Could not add customer do better!";
-      }
-      customerService.addCustomer(customer);
-      return "Customer with name: "+ customer.getName() +" added.";
+      return customerService.addCustomer(customer);
     }
-
-
 
 //EXTRA
     @GetMapping("/remove")

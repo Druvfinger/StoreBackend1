@@ -3,6 +3,8 @@ package com.example.storebackend1;
 
 import com.example.storebackend1.Entities.Customer;
 import com.example.storebackend1.Repos.CustomerRepo;
+import com.jayway.jsonpath.JsonPath;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +17,13 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.Arrays;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -50,17 +53,33 @@ public class CustomerControllerTest {
         this.mockMvc.perform(get("/customers")).andExpect(status().isOk()).andExpect(content().
                 json("[{\"name\":\"Sara\",\"id\":1,\"ssn\": \"123\"}," +
                 "{\"name\":\"Kalle\",\"id\":2,\"ssn\": \"312\"},"+ "{\"name\":\"Kanin\",\"id\":3,\"ssn\": \"432\"}]"));
+
+        String jsonResponse = this.mockMvc.perform(get("/customers"))
+                .andReturn().getResponse().getContentAsString();
+        int size = JsonPath.parse(jsonResponse).read("$.length()");
+        assertEquals(3, size);
+        assertNotEquals(4, size);
     }
     @Test
     public void getCustomerByIdTest() throws Exception{
-        this.mockMvc.perform(get("/customers/1")).andExpect(status().isOk()).
-                andExpect(content().json("{\"name\":\"Sara\",\"id\":1,\"ssn\": \"123\"}"));
+        this.mockMvc.perform(get("/customers/1"))
+                .andExpect(status().isOk())
+                .andExpect(content().json("{\"name\":\"Sara\",\"id\":1,\"ssn\": \"123\"}"));
+
+        this.mockMvc.perform(get("/customers/1"))
+                .andExpect(jsonPath("$.ssn", Matchers.not(equalTo("321"))));
     }
     @Test
     public void addCustomer() throws Exception{
         this.mockMvc.perform(post("/customers/add").contentType(MediaType.APPLICATION_JSON).
-                content("{\"name\":\"Dummy\",\"id\":4,\"ssn\": \"567\"}")).andExpect(status().isOk()).andExpect(content()
-                .string(equalTo("Customer with name: Dummy added.")));
+                content("{\"name\":\"Dummy\",\"id\":4,\"ssn\": \"567\"}"))
+                .andExpect(status().isOk())
+                .andExpect(content().string(equalTo("Customer with name: Dummy added.")));
+
+        this.mockMvc.perform(post("/customers/add").contentType(MediaType.APPLICATION_JSON).
+                content("{\"name\":null,\"id\":4,\"ssn\": \"567\"}"))
+                .andExpect(status().isOk())
+                .andExpect(content().string(equalTo("Could not add customer!")));
     }
 
 }
