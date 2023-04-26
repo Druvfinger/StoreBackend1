@@ -74,7 +74,7 @@ public class ItemsControllerTest {
     @Test
     public void getItemByIdTest() throws Exception {
         this.mockMvc.perform(get("/items/1")).andExpect(status().isOk()).andExpect(
-                content().json("{\"name\":\"product1\", \"id\":1, \"price\":1.0}"));
+                content().json("{\"name\":\"Laptop\", \"id\":1, \"price\":199.99}"));
     }
 
     @Test
