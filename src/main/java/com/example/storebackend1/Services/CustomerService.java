@@ -1,6 +1,5 @@
 package com.example.storebackend1.Services;
 
-
 import com.example.storebackend1.Entities.Customer;
 import com.example.storebackend1.Repos.CustomerRepo;
 import org.springframework.stereotype.Service;
@@ -12,7 +11,6 @@ public class CustomerService {
 
     private final CustomerRepo customerRepo;
 
-
     public CustomerService(CustomerRepo customerRepo) {
         this.customerRepo = customerRepo;
     }
@@ -22,7 +20,7 @@ public class CustomerService {
     }
 
     public Customer getCustomerById(long id) {
-        return customerRepo.findById(id).get();
+        return customerRepo.findById(id).orElse(null);
     }
 
     public String addCustomer(Customer customer) {
@@ -35,6 +33,7 @@ public class CustomerService {
         return "Could not add customer!";
     }
 
+    //EXTRA
     public void deleteCustomer(long id) {
         customerRepo.deleteById(id);
     }

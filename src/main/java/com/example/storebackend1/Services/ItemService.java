@@ -1,6 +1,5 @@
 package com.example.storebackend1.Services;
 
-
 import com.example.storebackend1.Entities.Customer;
 import com.example.storebackend1.Entities.Item;
 import com.example.storebackend1.Entities.Purchase;
@@ -28,7 +27,7 @@ public class ItemService {
     }
 
     public Item getItemById(long id) {
-        return itemRepo.findById(id).get();
+        return itemRepo.findById(id).orElse(null);
     }
     public String addItem(Item item){
         if (item.getName() != null) {
