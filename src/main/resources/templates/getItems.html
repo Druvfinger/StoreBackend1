@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Customers</title>
+    <style>
+        body {
+            font-family: Calibri, serif;
+            background-color: bisque;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        table {
+            margin: auto;
+            width: 80%;
+            background-color: white;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<h1 th:text="${title}"></h1>
+<div class="itemsList" th:unless="${#lists.isEmpty(itemsList)}">
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+        </tr>
+
+        <tr th:each="item : ${itemsList}">
+            <td th:text="${item.name}"></td>
+            <td th:text="${item.price}"></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

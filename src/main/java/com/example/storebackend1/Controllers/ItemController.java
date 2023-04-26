@@ -12,7 +12,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/item")
+@RequestMapping("/items")
 public class ItemController {
 
     private final ItemService itemService;
@@ -35,7 +35,7 @@ public class ItemController {
     @PostMapping("/add")
     public String addItem(@RequestBody Item item) {
         if (item.getName() != null) {
-            if (item.getPrice() != 0.0) { // CAN WE FIX NICER?
+            if (item.getPrice() != 0.0) {
                 itemService.addItem(item);
                 return "Item with name: " + item.getName() + " added";
             }

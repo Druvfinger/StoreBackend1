@@ -40,12 +40,15 @@ public class ItemService {
         Item item = itemRepo.findById(itemId).orElse(null);
         Customer customer = customerRepo.findById(customerId).orElse(null);
         System.out.println(item + " - " + customer);
-        if (item != null || customer != null){
-            Purchase p = new Purchase(customer,item);
-            purchaseRepo.save(p);
-            return "Purchase successful";
+        if (item != null){
+            System.out.println("1");
+            if (customer != null) {
+                System.out.println("2");
+                purchaseRepo.save(new Purchase(customer, item));
+                return "Purchase successful";
+            }
         }
-        return "YOU SUCK!";
+        return "Something went wrong with the purchase!";
     }
 
 }

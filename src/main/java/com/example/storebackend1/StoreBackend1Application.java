@@ -23,16 +23,16 @@ public class StoreBackend1Application {
     public static void main(String[] args) {
         SpringApplication.run(StoreBackend1Application.class, args);
     }
-
+/*
     @Bean
     public CommandLineRunner commandLineRunner(CustomerRepo customerRepo, ItemRepo itemRepo, PurchaseRepo purchaseRepo) {
         return args -> {
 
-            Customer customer1 = new Customer("ssn1", "n1");
-            Customer customer2 = new Customer("ssn2", "n2");
-            Customer customer3 = new Customer("ssn3", "n3");
-            Customer customer4 = new Customer("ssn4", "n4");
-            Customer customer5 = new Customer("ssn5", "n5");
+            Customer customer1 = new Customer("123456", "Karl Nilsson");
+            Customer customer2 = new Customer("234567", "Anna Jakobsson");
+            Customer customer3 = new Customer("345678", "Nils Svensson");
+            Customer customer4 = new Customer("456789", "Ida Andersson");
+            Customer customer5 = new Customer("567890", "Gunnar larsson");
 
             customerRepo.save(customer1);
             customerRepo.save(customer2);
@@ -42,11 +42,11 @@ public class StoreBackend1Application {
 
 
 
-            Item item1 = new Item("item1", 1);
-            Item item2 = new Item("item2", 2);
-            Item item3 = new Item("item3", 3);
-            Item item4 = new Item("item4", 4);
-            Item item5 = new Item("item5", 5);
+            Item item1 = new Item("Laptop", 199.99);
+            Item item2 = new Item("TV", 148.49);
+            Item item3 = new Item("Playstation", 300.00);
+            Item item4 = new Item("Chair", 40.99);
+            Item item5 = new Item("Mountainbike", 3499.98);
 
             itemRepo.save(item1);
             itemRepo.save(item2);
@@ -55,7 +55,7 @@ public class StoreBackend1Application {
             itemRepo.save(item5);
 
 
-            Purchase purchase = new Purchase(customer1, item1); // kom ihåg list of är final
+            Purchase purchase = new Purchase(customer1, item1);
             Purchase purchase1 = new Purchase(customer4, item2);
             Purchase purchase2 = new Purchase(customer3, item3);
             Purchase purchase3 = new Purchase(customer4, item4);
@@ -76,6 +76,6 @@ public class StoreBackend1Application {
             purchaseRepo.save(purchase3);
 
         };
-    }
+    }*/
 
 }
