@@ -2,17 +2,13 @@ package com.example.storebackend1.Controllers;
 
 import com.example.storebackend1.Entities.Customer;
 import com.example.storebackend1.Services.CustomerService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
 @RequestMapping("customers")
 public class CustomerController {
-
-
 
     private final CustomerService customerService;
 
@@ -26,10 +22,12 @@ public class CustomerController {
         return customerService.getCustomers();
     }
 
+
     @GetMapping("/{id}")
     public Customer getCustomerById(@PathVariable long id){
         return customerService.getCustomerById(id);
     }
+
 
     @PostMapping("/add")
     public String addCustomer(@RequestBody Customer customer){
@@ -39,6 +37,8 @@ public class CustomerController {
       customerService.addCustomer(customer);
       return "Customer with name: "+ customer.getName() +" added.";
     }
+
+
 
 //EXTRA
     @GetMapping("/remove")

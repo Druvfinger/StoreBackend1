@@ -2,12 +2,7 @@ package com.example.storebackend1.Controllers;
 
 import com.example.storebackend1.Entities.Item;
 import com.example.storebackend1.Services.ItemService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -16,7 +11,6 @@ import java.util.List;
 public class ItemController {
 
     private final ItemService itemService;
-    //private static final Logger log = LoggerFactory.getLogger(ItemController.class);
 
     public ItemController(ItemService itemService) {
         this.itemService = itemService;

@@ -1,12 +1,11 @@
 package com.example.storebackend1.Services;
 
-import com.example.storebackend1.Entities.Item;
+
 import com.example.storebackend1.Entities.Purchase;
 import com.example.storebackend1.Repos.CustomerRepo;
 import com.example.storebackend1.Repos.ItemRepo;
 import com.example.storebackend1.Repos.PurchaseRepo;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
