@@ -24,6 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
@@ -61,6 +62,11 @@ public class PurchaseControllerTest {
         when(mockPurchaseRepo.findById(1L)).thenReturn(Optional.of(purchase1));
         when(mockPurchaseRepo.findById(2L)).thenReturn(Optional.of(purchase2));
         when(mockPurchaseRepo.findById(3L)).thenReturn(Optional.of(purchase3));
+
+        when(mockPurchaseRepo.findAllByCustomerId(1L)).thenReturn(List.of(purchase1));
+        when(mockPurchaseRepo.findAllByCustomerId(2L)).thenReturn(List.of(purchase2));
+        when(mockPurchaseRepo.findAllByCustomerId(3L)).thenReturn(List.of(purchase3,purchase4));
+
         when(mockPurchaseRepo.findAll()).thenReturn(Arrays.asList(purchase1, purchase2, purchase3));
     }
 
@@ -125,14 +131,25 @@ public class PurchaseControllerTest {
         assertNotEquals(4, size);
     }
 
-    //TODO: DENNA GÅR INTE! -> []: Expected 1 values but got 0
-//    @Test
-//    public void getPhurchaseByIdTest() throws Exception {
-//        this.mockMvc.perform(get("/purchase/1"))
-//                .andExpect(status().isOk())
-//                .andExpect(content().json("[{\"id\":1,\"purchaseDate\":\"2023-04-26T23:30:00\",\"customer\":{\"id\":1,\"ssn\":\"123\",\"name\":\"Sara\"},\"items\":[{\"id\":1,\"name\":\"product1\",\"price\":1}]}]"));
+    @Test
+    public void getPurchaseByCustomerId() throws Exception{
+        this.mockMvc.perform(get("/purchase/1")).andExpect(status().isOk()).andDo(print())
+                .andExpect(content().json( "[{\n" +
+                        "    \"id\": 1,\n" +
+                        "    \"purchaseDate\": \"2023-04-26T23:30:00\" ,\n" +
+                        "    \"customer\": {\n" +
+                        "      \"id\": 1,\n" +
+                        "      \"ssn\": \"123\",\n" +
+                        "      \"name\": \"Sara\"\n" +
+                        "    },\n" +
+                        "    \"items\": [\n" +
+                        "      {\n" +
+                        "        \"id\": 1,\n" +
+                        "        \"name\": \"product1\",\n" +
+                        "        \"price\": 1\n" +
+                        "      }\n" +
+                        "    ]\n" +
+                        "  }]"));
 
-//        this.mockMvc.perform(get("/purchase/1"))
-//                .andExpect(jsonPath("$.id", Matchers.not(equalTo("2"))));
-//    }
+    }
 }
