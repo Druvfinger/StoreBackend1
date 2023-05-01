@@ -7,6 +7,7 @@ import com.example.storebackend1.Repos.CustomerRepo;
 import com.example.storebackend1.Repos.ItemRepo;
 import com.example.storebackend1.Repos.PurchaseRepo;
 import com.jayway.jsonpath.JsonPath;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +15,14 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.mockito.Mockito.when;
@@ -65,7 +68,7 @@ public class PurchaseControllerTest {
 
         when(mockPurchaseRepo.findAllByCustomerId(1L)).thenReturn(List.of(purchase1));
         when(mockPurchaseRepo.findAllByCustomerId(2L)).thenReturn(List.of(purchase2));
-        when(mockPurchaseRepo.findAllByCustomerId(3L)).thenReturn(List.of(purchase3,purchase4));
+        when(mockPurchaseRepo.findAllByCustomerId(3L)).thenReturn(List.of(purchase3, purchase4));
 
         when(mockPurchaseRepo.findAll()).thenReturn(Arrays.asList(purchase1, purchase2, purchase3));
     }
@@ -132,9 +135,9 @@ public class PurchaseControllerTest {
     }
 
     @Test
-    public void getPurchaseByCustomerId() throws Exception{
+    public void getPurchaseByCustomerId() throws Exception {
         this.mockMvc.perform(get("/purchase/1")).andExpect(status().isOk()).andDo(print())
-                .andExpect(content().json( "[{\n" +
+                .andExpect(content().json("[{\n" +
                         "    \"id\": 1,\n" +
                         "    \"purchaseDate\": \"2023-04-26T23:30:00\" ,\n" +
                         "    \"customer\": {\n" +
@@ -151,5 +154,10 @@ public class PurchaseControllerTest {
                         "    ]\n" +
                         "  }]"));
 
+        String jsonResponse = this.mockMvc.perform(get("/purchase/1"))
+                .andReturn().getResponse().getContentAsString();
+        int size = JsonPath.parse(jsonResponse).read("$.length()");
+        assertEquals(1, size);
+        assertNotEquals(2, size);
     }
 }
