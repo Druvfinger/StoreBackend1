@@ -25,7 +25,7 @@ public class Purchase {
     @JoinColumn
     private Customer customer;
 
-    @OneToMany
+    @ManyToMany
     @JoinTable
     List<Item> items = new ArrayList<>();
 

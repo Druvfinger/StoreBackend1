@@ -36,7 +36,6 @@ public class StoreBackend1Application {
             customerRepo.save(customer5);
 
 
-
             Item item1 = new Item("Laptop", 199.99);
             Item item2 = new Item("TV", 148.49);
             Item item3 = new Item("Playstation", 300.00);
@@ -49,21 +48,10 @@ public class StoreBackend1Application {
             itemRepo.save(item4);
             itemRepo.save(item5);
 
-
             Purchase purchase = new Purchase(customer1, item1);
             Purchase purchase1 = new Purchase(customer4, item2);
             Purchase purchase2 = new Purchase(customer3, item3);
             Purchase purchase3 = new Purchase(customer4, item4);
-
-
-
-//                    Customer temp = customerRepo.findById(customer1.getId()).get();
-//                    temp.addPurchase(purchase);
-//                    customer3.addPurchase(purchase2);
-//                    customer4.addPurchase(purchase1);
-//                    customer4.addPurchase(purchase3);
-
-
 
             purchaseRepo.save(purchase);
             purchaseRepo.save(purchase1);

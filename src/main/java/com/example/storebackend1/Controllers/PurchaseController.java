@@ -24,7 +24,4 @@ public class PurchaseController {
     public List<Purchase> getPurchasesByCustomerId(@PathVariable long customerId){
         return purchaseService.getCustomerPurchases(customerId);
     }
-
-
-
 }
