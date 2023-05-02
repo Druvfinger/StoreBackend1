@@ -1,8 +1,8 @@
 package com.example.storebackend1;
 
-import com.example.storebackend1.Entities.Customer;
-import com.example.storebackend1.Entities.Item;
-import com.example.storebackend1.Entities.Purchase;
+import com.example.storebackend1.Models.Customer;
+import com.example.storebackend1.Models.Item;
+import com.example.storebackend1.Models.Purchase;
 import com.example.storebackend1.Repos.CustomerRepo;
 import com.example.storebackend1.Repos.ItemRepo;
 import com.example.storebackend1.Repos.PurchaseRepo;

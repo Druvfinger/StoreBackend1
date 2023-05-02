@@ -1,7 +1,7 @@
 package com.example.storebackend1;
 
-import com.example.storebackend1.Entities.Customer;
-import com.example.storebackend1.Entities.Item;
+import com.example.storebackend1.Models.Customer;
+import com.example.storebackend1.Models.Item;
 import com.example.storebackend1.Repos.CustomerRepo;
 import com.example.storebackend1.Repos.ItemRepo;
 import com.example.storebackend1.Repos.PurchaseRepo;
@@ -61,19 +61,6 @@ public class ItemsControllerTest {
     }
 
     @Test
-    public void addItemTest() throws Exception {
-        this.mockMvc.perform(post("/items/add").contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"name\":\"product4\", \"id\":4, \"price\":4.0}"))
-                .andExpect(status().isOk())
-                .andExpect(content().string(equalTo("Item with name: product4 added")));
-
-        this.mockMvc.perform(post("/items/add").contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"name\":null, \"id\":4, \"price\":4.0}"))
-                .andExpect(status().isOk())
-                .andExpect(content().string(equalTo("Could not add item!")));
-    }
-
-    @Test
     public void getAllItemsTest() throws Exception {
         this.mockMvc.perform(get("/items"))
                 .andExpect(status().isOk())
@@ -85,6 +72,19 @@ public class ItemsControllerTest {
         int size = JsonPath.parse(jsonResponse).read("$.length()");
         assertEquals(3, size);
         assertNotEquals(4, size);
+    }
+
+    @Test
+    public void addItemTest() throws Exception {
+        this.mockMvc.perform(post("/items/add").contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"name\":\"product4\", \"id\":4, \"price\":4.0}"))
+                .andExpect(status().isOk())
+                .andExpect(content().string(equalTo("Item with name: product4 added")));
+
+        this.mockMvc.perform(post("/items/add").contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"name\":null, \"id\":4, \"price\":4.0}"))
+                .andExpect(status().isOk())
+                .andExpect(content().string(equalTo("Could not add item!")));
     }
 
     @Test

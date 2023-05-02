@@ -1,6 +1,6 @@
 package com.example.storebackend1.Services;
 
-import com.example.storebackend1.Entities.Customer;
+import com.example.storebackend1.Models.Customer;
 import com.example.storebackend1.Repos.CustomerRepo;
 import org.springframework.stereotype.Service;
 

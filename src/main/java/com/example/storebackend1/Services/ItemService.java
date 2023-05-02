@@ -1,8 +1,8 @@
 package com.example.storebackend1.Services;
 
-import com.example.storebackend1.Entities.Customer;
-import com.example.storebackend1.Entities.Item;
-import com.example.storebackend1.Entities.Purchase;
+import com.example.storebackend1.Models.Customer;
+import com.example.storebackend1.Models.Item;
+import com.example.storebackend1.Models.Purchase;
 import com.example.storebackend1.Repos.CustomerRepo;
 import com.example.storebackend1.Repos.ItemRepo;
 import com.example.storebackend1.Repos.PurchaseRepo;
@@ -42,6 +42,7 @@ public class ItemService {
     public String buy(long itemId, long  customerId){
         Item item = itemRepo.findById(itemId).orElse(null);
         Customer customer = customerRepo.findById(customerId).orElse(null);
+        System.out.println(item + " - " + customer);
         if (item != null){
             if (customer != null) {
                 purchaseRepo.save(new Purchase(customer, item));

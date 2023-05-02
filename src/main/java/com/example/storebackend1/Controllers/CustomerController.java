@@ -1,6 +1,6 @@
 package com.example.storebackend1.Controllers;
 
-import com.example.storebackend1.Entities.Customer;
+import com.example.storebackend1.Models.Customer;
 import com.example.storebackend1.Services.CustomerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

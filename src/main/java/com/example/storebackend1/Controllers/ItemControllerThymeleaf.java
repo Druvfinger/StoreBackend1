@@ -1,7 +1,7 @@
 package com.example.storebackend1.Controllers;
 
 import org.springframework.ui.Model;
-import com.example.storebackend1.Entities.Item;
+import com.example.storebackend1.Models.Item;
 import com.example.storebackend1.Services.ItemService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

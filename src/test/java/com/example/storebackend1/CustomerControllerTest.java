@@ -1,6 +1,6 @@
 package com.example.storebackend1;
 
-import com.example.storebackend1.Entities.Customer;
+import com.example.storebackend1.Models.Customer;
 import com.example.storebackend1.Repos.CustomerRepo;
 import com.example.storebackend1.Repos.PurchaseRepo;
 import com.jayway.jsonpath.JsonPath;

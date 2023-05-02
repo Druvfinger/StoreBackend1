@@ -1,13 +1,12 @@
 package com.example.storebackend1;
 
-import com.example.storebackend1.Entities.Customer;
-import com.example.storebackend1.Entities.Item;
-import com.example.storebackend1.Entities.Purchase;
+import com.example.storebackend1.Models.Customer;
+import com.example.storebackend1.Models.Item;
+import com.example.storebackend1.Models.Purchase;
 import com.example.storebackend1.Repos.CustomerRepo;
 import com.example.storebackend1.Repos.ItemRepo;
 import com.example.storebackend1.Repos.PurchaseRepo;
 import com.jayway.jsonpath.JsonPath;
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.mockito.Mockito.when;

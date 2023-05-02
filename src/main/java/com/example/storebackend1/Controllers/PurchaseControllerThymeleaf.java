@@ -1,6 +1,6 @@
 package com.example.storebackend1.Controllers;
 
-import com.example.storebackend1.Entities.Purchase;
+import com.example.storebackend1.Models.Purchase;
 import com.example.storebackend1.Services.PurchaseService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

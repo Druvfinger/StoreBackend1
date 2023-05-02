@@ -1,6 +1,6 @@
 package com.example.storebackend1.Controllers;
 
-import com.example.storebackend1.Entities.Customer;
+import com.example.storebackend1.Models.Customer;
 import com.example.storebackend1.Services.CustomerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +26,4 @@ public class CustomerControllerThymeleaf {
         model.addAttribute("title", "All Customers!");
         return "getCustomer.html";
     }
-
-
-
 }

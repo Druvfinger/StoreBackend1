@@ -1,6 +1,7 @@
 package com.example.storebackend1.Controllers;
 
-import com.example.storebackend1.Entities.Item;
+import com.example.storebackend1.Models.Item;
+import com.example.storebackend1.Models.Purchase;
 import com.example.storebackend1.Services.ItemService;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
